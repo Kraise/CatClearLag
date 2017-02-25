@@ -1,4 +1,4 @@
-package me.time6628.clag.sponge.commands;
+package me.time6628.clag.sponge.commands.subcommands.removeentities;
 
 import me.time6628.clag.sponge.CatClearLag;
 import org.spongepowered.api.command.CommandException;
@@ -10,16 +10,17 @@ import org.spongepowered.api.text.Text;
 import org.spongepowered.api.text.format.TextColors;
 
 /**
- * Created by TimeTheCat on 10/28/2016.
+ * Created by TimeTheCat on 1/30/2017.
  */
-public class ForceGCCommand implements CommandExecutor {
+public class RemoveLivingCommand implements CommandExecutor {
     CatClearLag plugin = CatClearLag.instance;
+
 
     @Override
     public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
-        src.sendMessage(Text.builder().append(plugin.getPrefix()).color(TextColors.LIGHT_PURPLE).append(Text.of("Requesting Garbage Collection...")).build());
-        System.gc();
-        src.sendMessage(Text.builder().append(plugin.getPrefix()).color(TextColors.LIGHT_PURPLE).append(Text.of("Garbage Collection Requested.")).build());
-        return CommandResult.success();
+        src.sendMessage(Text.builder().append(plugin.getPrefix()).append(plugin.colorMessage("Removing all living entities...")).build());
+        int affectedEnts = plugin.removeLiving();
+        src.sendMessage(Text.builder().append(plugin.getPrefix()).append(plugin.colorMessage("Removed " + affectedEnts + " living entites.")).build());
+        return CommandResult.affectedEntities(affectedEnts);
     }
 }

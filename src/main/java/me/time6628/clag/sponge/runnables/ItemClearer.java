@@ -19,15 +19,12 @@ import java.util.function.Predicate;
  * Created by pturc_000 on 7/13/2016.
  */
 public class ItemClearer implements Runnable {
-    private CatClearLag plugin;
-    public ItemClearer(CatClearLag plugin) {
-        this.plugin = plugin;
-    }
+    private CatClearLag plugin = CatClearLag.instance;
 
     @Override
     public void run() {
         plugin.clearGoundItems();
         //broadcast that they have all been removed
-        plugin.game.getServer().getBroadcastChannel().send(Text.builder().append(plugin.prefix).color(TextColors.LIGHT_PURPLE).append(Text.of("All ground items have been cleared.")).build());
+        plugin.getGame().getServer().getBroadcastChannel().send(Text.builder().append(plugin.getPrefix()).append(plugin.colorMessage("All ground items have been cleared.")).build());
     }
 }

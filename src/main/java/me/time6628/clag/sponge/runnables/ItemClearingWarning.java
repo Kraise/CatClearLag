@@ -11,15 +11,14 @@ import org.spongepowered.api.text.format.TextColors;
 public class ItemClearingWarning implements Runnable {
 
     private int seconds;
-    private CatClearLag plugin;
+    private CatClearLag plugin = CatClearLag.instance;
 
-    public ItemClearingWarning(int seconds, CatClearLag game) {
+    public ItemClearingWarning(int seconds) {
         this.seconds = seconds;
-        this.plugin = game;
     }
 
     @Override
     public void run() {
-        plugin.game.getServer().getBroadcastChannel().send(Text.builder().append(plugin.prefix).color(TextColors.RED).append(Text.of("Ground items will be cleared in " + seconds + " seconds.")).build());
+        plugin.getGame().getServer().getBroadcastChannel().send(Text.builder().append(plugin.getPrefix()).append(plugin.colorWarningMessage("Ground items will be cleared in " + seconds + " seconds.")).build());
     }
 }

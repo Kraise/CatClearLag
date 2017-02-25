@@ -1,9 +1,28 @@
-apply plugin: 'java'
+buildscript {
+    repositories {
+        mavenLocal()
+        maven {
+            name = 'sponge'
+            url = 'http://repo.spongepowered.org/maven'
+        }
+        maven {
+            name = 'gradle'
+            url = 'https://plugins.gradle.org/m2/'
+        }
+    }
+
+    dependencies {
+        classpath "gradle.plugin.com.qixalite:SpongeStart:1.5"
+    }
+}
+
+apply plugin: "java"
+apply plugin: "com.qixalite.spongestart"
 
 sourceCompatibility = '1.8'
 targetCompatibility = '1.8'
 
-version = '0.4.1'
+version = '0.7.1'
 
 repositories {
     mavenCentral()
@@ -13,5 +32,9 @@ repositories {
 }
 
 dependencies {
-    compile "org.spongepowered:spongeapi:5.+"
+    compile "org.spongepowered:spongeapi:6.+"
+}
+
+spongestart {
+    eula true
 }
